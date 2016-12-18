@@ -1,7 +1,7 @@
 import java.net.*;
-import java.lang.*;
-import java.io.*;
-import java.util.*;
+//import java.lang.*;
+//import java.io.*;
+//import java.util.*;
 
 public class myCluster {
 	public int counter = 0;
@@ -15,6 +15,8 @@ public class myCluster {
 
 		subThread mySubThread = new subThread(pointer);
 
+		cmdThread mycmdThread= new cmdThread();
+		
 		mySubThread.start();
 
 		try {
@@ -23,19 +25,9 @@ public class myCluster {
 				Thread.sleep(3000);
 
 			}
-
-			String cmd = "sh /root/myCluster/cluster.sh";
-			Process child = Runtime.getRuntime().exec(cmd);
-			InputStream child_in = child.getInputStream();
-			int c;
-			while ((c = child_in.read()) != -1) {
-				// System.out.println("kkk");
-				System.out.print((char) c);
-			}
-			child_in.close();
-
-			System.out.println("The ownership");
-
+			
+	     mycmdThread.start();
+			
 			byte[] arb = new byte[] { 'h', 'e', 'l', 'l', 'o' };
 			InetAddress inetAddress = InetAddress.getByName("230.0.0.1");
 			DatagramPacket datagramPacket = new DatagramPacket(arb, arb.length,
@@ -48,7 +40,6 @@ public class myCluster {
 				Thread.sleep(1000);
 				multicastSocket.send(datagramPacket);
 				Thread.sleep(1000);
-
 			}
 
 		} catch (Exception exception) {
