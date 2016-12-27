@@ -2,4 +2,6 @@
 
 This solution is for the beauty of maths.
 
-diff.py is used to derive difference of function.
+"myClass.py" file is the base class object file 
+
+"myClassDiff.py" is used to derive difference of each function.
