@@ -32,7 +32,7 @@ class myData:
         self.maths_output=""
         
     def myInput(self):
-        print("Please Input your string")
+        print("Please input your maths expression:")
         self.maths_exp=input()
         
     def myOutput(self):
