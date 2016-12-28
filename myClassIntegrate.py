@@ -32,9 +32,6 @@ class myIntegrate(myClass.myData):
         self.maths_integrate=""
         self.maths_output=""
         
-    def myInput(self):
-        print("Please Input your string")
-        self.maths_exp=input()
         
     def myOutput(self):
         pprint(self.maths_output,use_unicode=False)
