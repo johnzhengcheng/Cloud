@@ -30,7 +30,7 @@ class mySolve(myClass.myData):
     def myOutput(self):
         print("The answers are below:")
         for i in self.maths_output:
-            print(i.evalf())
+            print(round(i.evalf(),2))
                     
     
     def mySolve(self):
