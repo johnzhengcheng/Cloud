@@ -28,8 +28,10 @@ class mySolve(myClass.myData):
          
          
     def myOutput(self):
-        pprint(self.maths_output,use_unicode=False)
-        
+        print("The answers are below:")
+        for i in self.maths_output:
+            print(i.evalf())
+                    
     
     def mySolve(self):
         self.position=self.maths_exp.split("=")
