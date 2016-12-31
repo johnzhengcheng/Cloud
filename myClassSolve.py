@@ -27,11 +27,21 @@ init_printing(use_unicode=True)
 class mySolve(myClass.myData):    
          
          
+
+    def myOutput(self,indicate):        
+        if indicate=='D':
+            print("The answers are below:")
+            for i in self.maths_output:
+                print(round(i.evalf(),2))
+        else:
+            super(mySolve,self).myOutput()
+
     def myOutput(self):
         print("The answers are below:")
         for i in self.maths_output:
             print(round(i.evalf(),2))
                     
+
     
     def mySolve(self):
         self.position=self.maths_exp.split("=")
@@ -39,7 +49,7 @@ class mySolve(myClass.myData):
         self.maths_output=solve(self.tmp_str,x)
         
     
-            
+    
         
         
   
