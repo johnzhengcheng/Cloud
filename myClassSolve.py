@@ -36,32 +36,19 @@ class mySolve(myClass.myData):
         else:
             super(mySolve,self).myOutput()
 
-    def myOutput(self):
-        print("The answers are below:")
-        for i in self.maths_output:
-            print(round(i.evalf(),2))
-                    
-'''
-    
+            
+            
+            
+#    def myOutput(self):
+#        print("The answers are below:")
+#        for i in self.maths_output:
+#            print(round(i.evalf(),2))                
+
+            
+            
     def mySolve(self):
         self.position=self.maths_exp.split("=")
         self.tmp_str=self.position[0]+"-("+self.position[1]+")"
         self.maths_output=solve(self.tmp_str,x)
         
-    
-    
-        
-        
-  
-  
 
-      
-      
-  
-	
-    
-  
-  
-
-  
-   
