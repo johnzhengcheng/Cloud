@@ -41,7 +41,7 @@ class mySolve(myClass.myData):
         for i in self.maths_output:
             print(round(i.evalf(),2))
                     
-
+'''
     
     def mySolve(self):
         self.position=self.maths_exp.split("=")
