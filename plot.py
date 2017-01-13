@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 x = np.arange(0, 5, 0.1);
-y = x**2 
+y = x**2+2*x+1 
 plt.plot(x, y)
 x=np.array([1,2,3])
 y=x**2
-plt.scatter(x,y)
+plt.scatter(x,y,c='red')
 plt.show()
