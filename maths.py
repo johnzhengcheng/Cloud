@@ -12,7 +12,7 @@ Created on Aug 24, 2015
 '''
 
 from sympy import *
-a,b,m,n,x, y,z,t,k= symbols('a b m n x y z t k')
+a,b,m,n,x, y,z,t,k,lamda= symbols('a b m n x y z t k lamda')
 init_printing(use_unicode=True)
 
 
@@ -50,7 +50,7 @@ print(sin(x).series(x,0,10))
 ##微分方程
 
 from sympy import Function, Symbol, dsolve
-f = Function('f')
+f= Function('f')
 x = Symbol('x')
 dsolve(f(x).diff(x, x) + f(x), f(x))
 #f(x) = C₁⋅cos(x) + C₂⋅sin(x)
@@ -307,7 +307,8 @@ from math import sin
 
 func = lambda x,y : y*sin(x)
 
-print(integrate.nquad(func, [[0,1], [0,1]]))
+print(integrate.nquad
+      (func, [[0,1], [0,1]]))
 
 ====================读取CSV文件
 import csv
@@ -323,7 +324,8 @@ clf = linear_model.LinearRegression()
 clf.fit ([[0, 0], [1, 1], [2, 2]], [0, 1, 2])
 clf.coef_
 clf.intercept_
-
+clf.score([[0, 0], [1, 1], [2, 2]], [0, 1, 2])  #计算拟合度
+clf.predict([3])  ###estimation
 =====================Pands
 #####df新创建一个列
 import pandas as pd
@@ -475,5 +477,15 @@ c.sort()
 #Add some data
 #Add some data
 
+问题：矩阵A， python求其特征值和特征向量
+求解： 
+import numpy
+from numpy import mat
+A=mat([[8,1,6],[3,5,7],[4,9,2]])
+u,v=numpy.linalg.eig(A)
 
+v1=v[0].T   ##由于列向量才是特征向量
 
+A*v1[0].T  ##等价于Ax
+
+15*v[0]    ###等价于 lamda * x
