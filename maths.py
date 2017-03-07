@@ -477,8 +477,8 @@ c.sort()
 #Add some data
 #Add some data
 
-问题：矩阵A， python求其特征值和特征向量
-求解： 
+#问题：矩阵A， python求其特征值和特征向量
+#求解： 
 import numpy
 from numpy import mat
 A=mat([[8,1,6],[3,5,7],[4,9,2]])
@@ -489,3 +489,27 @@ v1=v[0].T   ##由于列向量才是特征向量
 A*v1[0].T  ##等价于Ax
 
 15*v[0]    ###等价于 lamda * x
+
+#逆矩阵 A.I
+
+
+#计算线性方程组
+
+import numpy as np
+from scipy import linalg
+a = np.array([[3,2,0],[1,-1,0],[0,5,1]])
+b = np.array([2,4,-1])
+x = linalg.solve(a,b)
+x
+
+###奇异值
+##sigma is singular values' matrix
+import numpy 
+from numpy import mat
+A=mat([[1,2,3],[4,5,6]])
+from numpy import linalg as la 
+U,sigma,VT=la.svd(A) 
+
+
+
+
