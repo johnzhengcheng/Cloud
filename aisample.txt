@@ -1,0 +1,47 @@
+FEATURES   Page 18 of first slide
+
+THE RIGHT ASPECTS OF YOUR DATA FOR THE TASK
+
+1)多元线性回归
+
+from sklearn import linear_model
+clf = linear_model.LinearRegression()
+clf.fit ([[2104,3], [1600,3], [2400,3],[1416,2],[3000,4],[1985,4],[2000,5]], [399900,329900,36900,232000,539900,299900,300000])
+print(clf.coef_)
+print(clf.intercept_)
+clf.socre([[2104,3], [1600,3], [2400,3],[1416,2],[3000,4],[1985,4],[2000,5]], [399900,329900,36900,232000,539900,299900,300000])
+clf.predict([[1000,2]])
+
+
+2)多项式回归
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn import linear_model
+clf = linear_model.LinearRegression()
+pol = PolynomialFeatures(degree = 2)
+xtrain=[[2104,3], [1600,3], [2400,3],[1416,2],[3000,4],[1985,4],[2000,5]]
+ytrain=[399900,329900,36900,232000,539900,299900,300000]
+xtrain_pol = pol.fit_transform(xtrain)
+clf.fit(xtrain_pol,ytrain)
+clf.score(xtrain_pol,ytrain)
+
+3)聚类
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
+data = np.random.rand(100, 2) #生成平面上100多随机点 
+estimator = KMeans(n_clusters=6)#构造聚类器
+estimator.fit(data)#聚类
+color_index=['r','g','b','yellow','purple','orange']
+label_pred = estimator.labels_ #获取聚类标签
+centroids = estimator.cluster_centers_ #获取聚类中心
+
+for dot_index in range(100):
+	color_indicate=label_pred[dot_index]%3
+	plt.scatter(data[dot_index][0],data[dot_index][1],25,color_index[color_indicate])
+	
+for dot_index in range(6):
+	plt.scatter(centroids[dot_index][0],centroids[dot_index][1],200,color_index[dot_index%3])
+
+plt.show()
