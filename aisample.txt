@@ -12,18 +12,106 @@ print(clf.intercept_)
 clf.socre([[2104,3], [1600,3], [2400,3],[1416,2],[3000,4],[1985,4],[2000,5]], [399900,329900,36900,232000,539900,299900,300000])
 clf.predict([[1000,2]])
 
+1.1)one feature
+from sklearn import linear_model
+clf = linear_model.LinearRegression()
+clf.fit ([[2104],[1600],[2400],[1416],[3000],[1985]], [399900,329900,36900,232000,539900,299900])
+print(clf.coef_)
+print(clf.intercept_)
+clf.score([[2104],[1600],[2400],[1416],[3000],[1985]], [399900,329900,36900,232000,539900,299900])
+
+1.2) demo regression
+线性回归
+from sklearn import linear_model
+import numpy as np
+import matplotlib.pyplot as plt
+xtrain=np.array([2104,1600,2400,1416,3000,1985,2000])
+ytrain=np.array([399900,329900,36900,232000,539900,299900,300000])
+from sklearn import linear_model
+clf = linear_model.LinearRegression()
+clf.fit(np.transpose(np.matrix(xtrain)), np.transpose(np.matrix(ytrain)))
+orignal_y=clf.intercept_
+end_y=5000*clf.coef_+clf.intercept_
+x=[0,5000]
+y=[orignal_y,end_y]
+plt.scatter(xtrain,ytrain)
+plt.plot(x,y)
+plt.show()
+print(clf.score(np.transpose(np.matrix(xtrain)), np.transpose(np.matrix(ytrain))))
+
+
+
 
 2)多项式回归
 
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn import linear_model
-clf = linear_model.LinearRegression()
+from sklearn import svm
+clf = linear_model.LinearRegression()    #将多项式回归先映射到线性，升维度
 pol = PolynomialFeatures(degree = 2)
 xtrain=[[2104,3], [1600,3], [2400,3],[1416,2],[3000,4],[1985,4],[2000,5]]
 ytrain=[399900,329900,36900,232000,539900,299900,300000]
 xtrain_pol = pol.fit_transform(xtrain)
 clf.fit(xtrain_pol,ytrain)
 clf.score(xtrain_pol,ytrain)
+
+
+####One feature
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn import linear_model
+from sklearn import svm
+import numpy as np
+import matplotlib.pyplot as plt
+clf = linear_model.LinearRegression()
+pol = PolynomialFeatures(degree = 2)
+xtrain=np.array([2104,1600,2400,1416,3000,1985,2000])
+xtrain=np.transpose(np.matrix(xtrain))
+ytrain=np.array([399900,329900,36900,232000,539900,299900,300000])
+ytrain=np.transpose(np.matrix(ytrain))
+xtrain_pol = pol.fit_transform(xtrain)
+clf.fit(xtrain_pol,ytrain)
+x=np.arange(0,5000,0.1)
+y=x**2*clf.coef_[0][2]+x*clf.coef_[0][1]+clf.intercept_
+plt.scatter(xtrain,ytrain)
+plt.plot(x,y)
+plt.show()
+print(clf.score(xtrain_pol,ytrain))
+
+####################多项式回归，最高阶为3
+
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn import linear_model
+from sklearn import svm
+import numpy as np
+import matplotlib.pyplot as plt
+clf = linear_model.LinearRegression()
+pol = PolynomialFeatures(degree = 3)
+xtrain=np.array([2104,1600,2400,1416,3000,1985,2000])
+xtrain=np.transpose(np.matrix(xtrain))
+ytrain=np.array([399900,329900,36900,232000,539900,299900,300000])
+ytrain=np.transpose(np.matrix(ytrain))
+xtrain_pol = pol.fit_transform(xtrain)
+clf.fit(xtrain_pol,ytrain)
+x=np.arange(0,5000,0.1)
+y=x**3*clf.coef_[0][3]+x**2*clf.coef_[0][2]+x*clf.coef_[0][1]+clf.intercept_
+plt.scatter(xtrain,ytrain)
+plt.plot(x,y)
+plt.show()
+print(clf.score(xtrain_pol,ytrain))
+
+
+
+2.1)SVM
+from sklearn import svm
+#clf=svm.SVC()
+#clf=svm.LinearSVC()
+clf=svm.SVC(kernel='linear')
+xtrain=[[2104,3], [1600,3],[2400,3],[1416,2],[3000,4],[1985,4],[2000,5]]
+ytrain=[399900,329900,36900,232000,539900,299900,300000]
+clf.fit(xtrain,ytrain)
+clf.score(xtrain,ytrain)
+
 
 3)聚类
 
@@ -38,10 +126,43 @@ label_pred = estimator.labels_ #获取聚类标签
 centroids = estimator.cluster_centers_ #获取聚类中心
 
 for dot_index in range(100):
-	color_indicate=label_pred[dot_index]%3
+	color_indicate=label_pred[dot_index]%6
 	plt.scatter(data[dot_index][0],data[dot_index][1],25,color_index[color_indicate])
 	
 for dot_index in range(6):
-	plt.scatter(centroids[dot_index][0],centroids[dot_index][1],200,color_index[dot_index%3])
+	plt.scatter(centroids[dot_index][0],centroids[dot_index][1],200,color_index[dot_index%6])
 
 plt.show()
+
+
+4) pure numpy
+线性回归
+
+from numpy import arange,array,ones,linalg
+from pylab import plot,show
+
+xi = arange(0,9)
+xj = arange(11,20)
+
+A = array([ xi, xj, ones(9)])
+
+# linearly generated sequence
+y = [19, 20, 20.5, 21.5, 22, 23, 23, 25.5, 24]
+
+print(y)
+w = linalg.lstsq(A.T,y)[0] # obtaining the parameters,lstsq最小二乘法
+
+print(A.T)
+
+
+print(w.shape)
+print(w[0],w[1],w[2])
+
+5) Pandas to acquire data from CSV file
+import numpy as np
+import pandas as pd
+df=pd.read_csv("c:\\users\\echezhe\\csv.csv")
+xtrain=np.array(df["room"])
+ytrain=np.array(df["price"])
+clf.fit(np.transpose(np.matrix(xtrain)), np.transpose(np.matrix(ytrain)))
+
